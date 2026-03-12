@@ -1,18 +1,20 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 @app.route('/')
-def login():
+def home():
     return render_template('login.html')
 
 @app.route('/login', methods=['POST'])
-def login_user():
+def login():
     email = request.form['email']
     password = request.form['password']
 
-    # Simple validation (example)
-    if email == "admin@example.com" and password == "12345":
+    if len(password) < 6:
+        return "Password must be at least 6 digits"
+
+    if email == "admin@gmail.com" and password == "123456":
         return "Login Successful"
     else:
         return "Invalid Email or Password"
